@@ -1,96 +1,63 @@
-﻿#include <cstdio> 
+﻿#include <iostream>
+using namespace std;
 
-void create(int** arr, int len, int start = 0, int inc = 0)
-{
-    if (len <= 0)
-    {
-        fprintf(stderr, "Cannot create arr with length %d.\n", len);
-        return;
-    }
-    *arr = new int[len];
-    if (!arr)
-    {
-        fprintf(stderr, "Could not create array with length %d.\n", len);
-        return;
-    }
-    for (int i = 0; i < len; ++i)
-    {
-        (*arr)[i] = start;
-        start += inc;
+void create(int** array, int array_len, int array_first = 0, int array_step = 0) {
+    *array = new int[array_len];
+
+    for (int i = 0; i < array_len; i++) {
+        (*array)[i] = array_step * i + array_first;
     }
 }
 
-int* sort(int* arr, int len)
-{
-    if (len <= 0)
-    {
-        fprintf(stderr, "Cannot sort array with length %d.\n", len);
-        return arr;
-    }
-    if (!arr)
-    {
-        fprintf(stderr, "Cannot sort nullptr array.\n");
-        return arr;
-    }
-
-    /* https://en.wikipedia.org/wiki/Insertion_sort#Algorithm */
-    int value, j;
-    for (int i = 1; i < len; ++i)
-    {
-        value = arr[i];
-        j = i - 1;
-        while (j >= 0 && arr[j] > value)
-        {
-            arr[j + 1] = arr[j];
-            --j;
+int* sort(int* array, int array_len) {
+    int i = 1;
+    int tmp;
+    while (i < array_len) {
+        int j = i;
+        while (j > 0 and array[j - 1] > array[j]) {
+            tmp = array[j - 1];
+            array[j - 1] = array[j];
+            array[j] = tmp;
+            j -= 1;
         }
-        arr[j + 1] = value;
+        i += 1;
     }
-    return arr;
+    return array;
 }
 
-int* print(int* arr, int len)
-{
-    if (len == 0)
-    {
-        printf("[]\n");
-        return arr;
+int* print(int* array, int array_len) {
+    for (int i = 0; i < array_len; i++) {
+        if (i == 0) cout << "[";
+        cout << array[i];
+        if (i < array_len - 1) {
+            cout << ", ";
+        }
+        else { cout << "]"; }
     }
-    if (len < 0)
-    {
-        fprintf(stderr, "Cannot print array with length %d.\n", len);
-        return arr;
-    }
-    if (!arr)
-    {
-        fprintf(stderr, "Cannot print nullptr array.\n");
-        return arr;
-    }
-    printf("[%d", *arr);
-    for (int i = 1; i < len; ++i)
-        printf(", %d", arr[i]);
-    printf("]\n");
-    return arr;
+    return array;
 }
 
-void destroy(int** arr)
-{
-    if (!*arr)
-    {
-        delete[] * arr;
-        *arr = nullptr;
+void destroy(int* array) {
+    if (array != nullptr) {
+        delete[] array;
+        int* array = nullptr;
     }
 }
 
-int main(int argc, char* argv[])
+int main()
 {
-    int len, start, inc;
-    puts("Enter length, begin value and increment.");
-    scanf("%d%d%d", &len, &start, &inc);
-    int* arr;
-    create(&arr, len, start, inc);
-    sort(arr, len);
-    print(arr, len);
-    destroy(&arr);
+    int array_len, array_first, array_step;
+    int* array;
+
+    cin >> array_len;
+    cin >> array_first;
+    cin >> array_step;
+
+    create(&array, array_len, array_first, array_step);
+    sort(array, array_len);
+    print(array, array_len);
+
+    destroy(array);
+
     return 0;
 }
