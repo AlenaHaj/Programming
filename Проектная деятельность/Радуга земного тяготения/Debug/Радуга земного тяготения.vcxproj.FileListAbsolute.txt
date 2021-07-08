@@ -1,0 +1,5 @@
+C:\Users\admin\source\repos\Радуга земного тяготения\Debug\Радуга земного тяготения.vcxprojAssemblyReference.cache
+C:\Users\admin\source\repos\Радуга земного тяготения\Debug\Радуга земного тяготения.exe
+C:\Users\admin\source\repos\Радуга земного тяготения\Debug\Радуга земного тяготения.pdb
+C:\Users\admin\source\repos\Радуга земного тяготения\Debug\Радугаземноготяготения.MyForm.resources
+C:\Users\admin\source\repos\Радуга земного тяготения\Debug\Радуга земного тяготения.vcxproj.GenerateResource.cache
